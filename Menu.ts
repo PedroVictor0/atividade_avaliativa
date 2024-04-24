@@ -9,5 +9,3 @@ class Menu extends itemMenu {
     }
 }
 
-let menu  = new Menu();
-menu.imprimirMenu()
