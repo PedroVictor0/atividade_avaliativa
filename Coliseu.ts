@@ -1,4 +1,8 @@
 class Coliseu {
-    private monstro: string;
+    private monstro: Monstro;
 
+    public getMonstro(){
+        return this.monstro
+    }
 }
+

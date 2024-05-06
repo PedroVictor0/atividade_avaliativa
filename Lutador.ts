@@ -1,15 +1,16 @@
 class Lutador {
-
     private HP: number;
     private MP: number;
     private ataque: number;
     private defesa: number;
-    private equipamentoMao: string;
-    private equipamentocabeca: string;
-    private equipamentoCorpo: string; 
+    private equipamentoMao: Equipamento;
+    private equipamentocabeca: Equipamento;
+    private equipamentoCorpo: Equipamento; 
     HPmax: number;
+    MPmax: number;
 
-    constructor (hp: number, mp: number, ataque: number, defesa: number, em: string, ec: string, corpo: string, hpmax: number) {
+    constructor (hp: number, mp: number, ataque: number, defesa: number, em: Equipamento
+        , ec: Equipamento, corpo: Equipamento) {
       
         this.HP = hp;
         this.MP = mp;
@@ -18,7 +19,8 @@ class Lutador {
         this.equipamentoMao = em;
         this.equipamentocabeca = ec;
         this.equipamentoCorpo = corpo;
-        this.HPmax = hpmax
+        this.HPmax = hp
+        this.MPmax = mp
 
     }
 
@@ -53,25 +55,47 @@ class Lutador {
         HP: ${this.HP}
         MP: ${this.MP}
         Ataque: ${this.ataque}
-        Defesa: ${this.defesa} `)
+        Defesa: ${this.defesa}
+         `)
     }
 
-    ataqueLutador(){
-        return this.ataque
+    getAtaqueLutador(){
+        return this.ataque + this.equipamentoCorpo.getaumentoAtaq() + this.equipamentoMao.getaumentoAtaq() + this.equipamentocabeca.getaumentoAtaq()
+        
     }
 
-    ataqueEspeciaç(){
-        this.ataque += this.ataque + 0.50;
-        this.MP -= this.MP * 0.20
-        if(this.HP > this.MP){
-            console.log("MP Insuficiente")
-            return 0
+    getAtaqueEspecial(){
+        
+        if(this.MP < this.MPmax * 0.2 ){
+            console.log("MP insuficiente")
+          return 0 
         }
+
+        this.MP -= this.MPmax * 0.2;
+        let ataqueEspecial = this.getAtaqueLutador() * 1.50;
+        return ataqueEspecial;
+    }
+
+    getDefesa(){
+        return this.defesa + this.equipamentoCorpo.getaumentoDef() + this.equipamentoMao.getaumentoDef() + this.equipamentocabeca.getaumentoDef()
     }
 
     receberDano(danoSofrido: number){
-        this.HP -= this.HPmax - danoSofrido
-        return this.HP;
-        
+        if(this.getDefesa() >= danoSofrido){
+            return this.defesa;
+        }
+        else {
+            this.HP -= this.HP - (danoSofrido - this.getDefesa())
+        }
+    }
+
+    getTomarPocaoHP(){
+        this.HP += this.HPmax * 0.25;
+    }
+
+    getTomarPorcaoMP(){
+        this.MP += this.MPmax * 0.25; 
     }
 }
+
+let pedro = new Lutador(300, 200, 30, 35, "pedro", "Coroa de rei", "Gota de Couro")

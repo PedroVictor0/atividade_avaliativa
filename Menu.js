@@ -1,27 +1,21 @@
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var Menu = /** @class */ (function (_super) {
-    __extends(Menu, _super);
+var Menu = /** @class */ (function () {
     function Menu() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        var ataque = new ItemMenu("1", "Atacar");
+        var ataqueEspecial = new ItemMenu("2", "Ataque Especial");
+        var curaHp = new ItemMenu("3", "Cura de MP");
+        var MP = new ItemMenu("4", "Restaurar MP");
+        var desefa = new ItemMenu("5", "Defender");
+        this.itensMenu.push(ataque);
+        this.itensMenu.push(ataqueEspecial);
+        this.itensMenu.push(curaHp);
+        this.itensMenu.push(MP);
+        this.itensMenu.push(desefa);
     }
     Menu.prototype.imprimirMenu = function () {
-        console.log("1 - Atacar \n             2 - Ataque especial\n             3 - Tomar po\u00E7\u00E3o de Cura de HP\n             4 - Tomar po\u00E7\u00E3o que restaura MP\n             5 - Defender");
+        this.itensMenu.forEach(function (itemMenu) { return console.log(itemMenu.getopcao() + " - " + itemMenu.gettextoDaOpcao()); });
+        var enter = require('prompt-sync')();
+        var opcaoSelecionada = enter("Selecione uma opção");
+        return opcaoSelecionada;
     };
     return Menu;
-}(itemMenu));
-var menu = new Menu();
-menu.imprimirMenu();
+}());

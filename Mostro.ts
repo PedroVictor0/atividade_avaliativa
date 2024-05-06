@@ -4,25 +4,29 @@ class Monstro {
     private forcaDefesa: number;
     hpMAx: number;
 
-    constructor (hp: number, fa: number, fd: number, hpmax: number){
+    constructor (hp: number, fa: number, fd: number){
         this.healthPoints = hp;
         this.forcaAtaque = fa;
         this.forcaDefesa = fd;
-        this.hpMAx = hpmax;
+        this.hpMAx = hp;
     }
 
-    receberDano(danoSofrido: number){
-        if (this.healthPoints  <= this.hpMAx * 0.25){
+    receberDano(danoSofrido: number) {
 
-            if (this.forcaDefesa < danoSofrido){
-                this.healthPoints = this.healthPoints - (danoSofrido - this.forcaDefesa)
-            }
+        if(this.forcaDefesa >= danoSofrido){
+            return this.healthPoints;
+        }
+
+        if (this.healthPoints  <= this.hpMAx * 0.25){
             danoSofrido -= danoSofrido * 0.5;
             this.forcaAtaque += this.forcaAtaque * 0.10;
             this.forcaDefesa += this.forcaDefesa * 0.30;
         }
-        if (this.healthPoints == 0){
-        console.log("Monstro derrotado!!!!!")
+
+        this.healthPoints = this.healthPoints - (danoSofrido - this.forcaDefesa)
+
+        if (this.healthPoints <= 0){
+            console.log("Monstro derrotado!!!!!")
         }
         return this.healthPoints;
     }
@@ -45,3 +49,5 @@ class Monstro {
     }
 
 }
+
+let mumia = new Monstro(100, 50, 20)

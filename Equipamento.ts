@@ -4,7 +4,7 @@ class Equipamento {
     private aumentoDef: number;
    
 
-    constructor (n: string, atac: number, def: number, em: string, ec: string, corpo: string){
+    constructor (n: string, atac: number, def: number){
         this.nome = n;
         this.aumentoAtaq = atac;
         this.aumentoDef = def;
@@ -25,5 +25,6 @@ class Equipamento {
     public getaumentoDef(){
         return this.aumentoDef;
     }    
-
 }
+
+let equipamento = new Equipamento("martelo", 30, 15)
